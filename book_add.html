@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <h2>{{ t('add_book') }}</h2>
+  <form method="post">
+    <div class="grid grid-2">
+      <div>
+        <label>{{ t('title') }}</label>
+        <input name="title" required>
+      </div>
+      <div>
+        <label>{{ t('author') }}</label>
+        <input name="author">
+      </div>
+      <div>
+        <label>SKU</label>
+        <input name="sku">
+      </div>
+      <div>
+        <label>{{ t('price') }}</label>
+        <input name="price" type="number" step="0.01" required>
+      </div>
+      <div>
+        <label>{{ t('stock') }}</label>
+        <input name="stock" type="number" step="1" required>
+      </div>
+    </div>
+    <br>
+    <button type="submit">{{ t('save') }}</button>
+  </form>
+</div>
+{% endblock %}

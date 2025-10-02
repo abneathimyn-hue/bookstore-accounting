@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <h2>{{ t('settings') }}</h2>
+  <form method="post" enctype="multipart/form-data">
+    <div class="grid grid-2">
+      <div><label>{{ t('library_name') }}</label><input name="library_name" value="{{ settings.get('library_name','') }}"></div>
+      <div><label>{{ t('phone') }}</label><input name="phone" value="{{ settings.get('phone','') }}"></div>
+      <div><label>{{ t('address') }}</label><input name="address" value="{{ settings.get('address','') }}"></div>
+      <div>
+        <label>{{ t('language') }}</label>
+        <select name="language">
+          <option value="ar" {{ 'selected' if settings.get('language')=='ar' else '' }}>{{ t('arabic') }}</option>
+          <option value="en" {{ 'selected' if settings.get('language')=='en' else '' }}>{{ t('english') }}</option>
+          <option value="tr" {{ 'selected' if settings.get('language')=='tr' else '' }}>{{ t('turkish') }}</option>
+        </select>
+      </div>
+      <div>
+        <label>{{ t('logo') }}</label>
+        <input type="file" name="logo">
+      </div>
+    </div>
+    <br>
+    <button type="submit">{{ t('save') }}</button>
+  </form>
+</div>

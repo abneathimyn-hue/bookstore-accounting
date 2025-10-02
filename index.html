@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="grid grid-3">
+  <div class="card">
+    <div class="flex" style="justify-content:space-between">
+      <div>{{ t('books_total') }}</div><div class="badge">{{ counts.books }}</div>
+    </div>
+    <hr>
+    <a class="btn" href="{{ url_for('books_list') }}">{{ t('manage_books') }}</a>
+  </div>
+  <div class="card">
+    <div class="flex" style="justify-content:space-between">
+      <div>{{ t('invoices_total') }}</div><div class="badge">{{ counts.invoices }}</div>
+    </div>
+    <hr>
+    <a class="btn" href="{{ url_for('invoice_new') }}">{{ t('new_invoice') }}</a>
+  </div>
+  <div class="card">
+    <div class="flex" style="justify-content:space-between">
+      <div>{{ t('stale_books') }}</div><div class="badge">{{ stale_count }}</div>
+    </div>
+    <hr>
+    <a class="btn" href="{{ url_for('stale_books') }}">{{ t('view_stale') }}</a>
+  </div>
+</div>
+{% if stale_count > 0 %}
+  <div class="card" style="margin-top:16px; border-left:4px solid #f59e0b">
+    <strong>{{ t('stale_alert') }}</strong>
+    <div>{{ t('stale_hint') }}</div>
+  </div>
+{% endif %}
+{% endblock %}

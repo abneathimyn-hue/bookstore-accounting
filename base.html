@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="{{ lang }}" dir="{{ 'rtl' if lang == 'ar' else 'ltr' }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ t('app_title') }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <div class="container">
+      <div class="nav">
+        <div class="brand">
+          <img src="{{ settings.get('logo','') or url_for('static', filename='logo.png') }}" alt="logo" onerror="this.style.opacity=0.3">
+          <div>
+            <div class="title">{{ settings.get('library_name', t('default_library')) }}</div>
+            <div class="muted" style="font-size:12px;color:#9aa3b2">{{ settings.get('phone','') }} • {{ settings.get('address','') }}</div>
+          </div>
+        </div>
+        <div class="lang-switch">
+          <a href="{{ url_for('set_lang','ar') }}" class="btn">{{ t('arabic') }}</a>
+          <a href="{{ url_for('set_lang','en') }}" class="btn">{{ t('english') }}</a>
+          <a href="{{ url_for('set_lang','tr') }}" class="btn">{{ t('turkish') }}</a>
+          <a href="{{ url_for('settings_page') }}" class="btn">{{ t('settings') }}</a>
+        </div>
+      </div>
+      {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          <div class="card" style="border-left:4px solid #22d3ee">
+            {% for m in messages %}<div>{{ m }}</div>{% endfor %}
+          </div>
+        {% endif %}
+      {% endwith %}
+      {% block content %}{% endblock %}
+      <div class="footer">{{ t('footer_note') }}</div>
+    </div>
+    <script>
+      function addItemRow(){
+        const table = document.getElementById('items-body');
+        if(!table) return;
+        const row = document.createElement('tr');
+        row.innerHTML = document.getElementById('row-template').innerHTML;
+        table.appendChild(row);
+      }
+      function removeRow(btn){ btn.closest('tr').remove(); }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <h2>{{ t('invoice') }} #{{ inv['id'] }}</h2>
+  <div>{{ t('customer_name') }}: {{ inv['customer_name'] }} | {{ t('phone') }}: {{ inv.get('customer_phone','') }}</div>
+  <div>{{ t('date') }}: {{ inv['date'] }}</div>
+  <hr>
+  <table class="table">
+    <thead><tr><th>{{ t('title') }}</th><th>{{ t('price') }}</th><th>{{ t('qty') }}</th><th>{{ t('total') }}</th></tr></thead>
+    <tbody>
+      {% for it in inv['items'] %}
+      <tr>
+        <td>{{ it['title'] }}</td>
+        <td>{{ '%.2f'|format(it['price']) }}</td>
+        <td>{{ it['qty'] }}</td>
+        <td>{{ '%.2f'|format(it['price']*it['qty']) }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <div class="right"><strong>{{ t('grand_total') }}: {{ '%.2f'|format(inv['total']) }}</strong></div>
+  <br><br>
+  <a class="btn" href="{{ url_for('invoice_pdf', inv_id=inv['id']) }}">{{ t('download_pdf') }}</a>
+</div>
+{% endblock %}

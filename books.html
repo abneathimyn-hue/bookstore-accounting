@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <div class="flex" style="justify-content:space-between; align-items:center">
+    <h2>{{ t('books') }}</h2>
+    <a class="btn" href="{{ url_for('book_add') }}">{{ t('add_book') }}</a>
+  </div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>#</th><th>{{ t('title') }}</th><th>{{ t('author') }}</th>
+        <th>{{ t('price') }}</th><th>{{ t('stock') }}</th><th>{{ t('last_sold') }}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for b in books %}
+      <tr>
+        <td>{{ b['id'] }}</td>
+        <td>{{ b['title'] }}</td>
+        <td>{{ b.get('author','') }}</td>
+        <td>{{ '%.2f'|format(b['price']) }}</td>
+        <td>{{ b['stock'] }}</td>
+        <td>{{ b.get('last_sold_at','-') }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}

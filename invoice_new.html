@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="card">
+  <h2>{{ t('new_invoice') }}</h2>
+  <form method="post">
+    <div class="grid grid-2">
+      <div>
+        <label>{{ t('customer_name') }}</label>
+        <input name="customer_name" required>
+      </div>
+      <div>
+        <label>{{ t('phone') }}</label>
+        <input name="customer_phone">
+      </div>
+    </div>
+    <hr>
+    <table class="table">
+      <thead>
+        <tr><th>{{ t('book') }}</th><th>{{ t('price') }}</th><th>{{ t('qty') }}</th><th></th></tr>
+      </thead>
+      <tbody id="items-body">
+        <tr>
+          <td>
+            <select name="book_id">
+              {% for b in books %}
+                <option value="{{ b['id'] }}" data-price="{{ b['price'] }}">{{ b['title'] }} ({{ b['stock'] }})</option>
+              {% endfor %}
+            </select>
+          </td>
+          <td><input name="price" type="number" step="0.01" value="{{ books[0]['price'] if books else 0 }}"></td>
+          <td><input name="qty" type="number" step="1" value="1"></td>
+          <td><button type="button" class="btn" onclick="removeRow(this)">✕</button></td>
+        </tr>
+      </tbody>
+    </table>
+    <template id="row-template">
+      <td>
+        <select name="book_id">
+          {% for b in books %}
+            <option value="{{ b['id'] }}" data-price="{{ b['price'] }}">{{ b['title'] }} ({{ b['stock'] }})</option>
+          {% endfor %}
+        </select>
+      </td>
+      <td><input name="price" type="number" step="0.01" value="0"></td>
+      <td><input name="qty" type="number" step="1" value="1"></td>
+      <td><button type="button" class="btn" onclick="removeRow(this)">✕</button></td>
+    </template>
+    <br>
+    <button type="button" onclick="addItemRow()">{{ t('add_item') }}</button>
+    <button type="submit" class="right">{{ t('create_invoice') }}</button>
+  </form>
+</div>
+{% endblock %}

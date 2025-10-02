@@ -1,0 +1,36 @@
+:
+:root{
+  --bg:#0f1115; --card:#151822; --text:#e9edf1; --muted:#9aa3b2; --primary:#8b5cf6;
+  --accent:#22d3ee; --ok:#10b981; --warn:#f59e0b; --danger:#ef4444; --border:#23283a;
+}
+*{box-sizing:border-box} body{margin:0;font-family:Inter,system-ui,Segoe UI,Arial,sans-serif;
+  background:var(--bg);color:var(--text)}
+a{color:var(--accent);text-decoration:none}
+.container{max-width:1100px;margin:24px auto;padding:0 16px}
+.nav{display:flex;gap:12px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.brand{display:flex;gap:10px;align-items:center}
+.brand img{width:40px;height:40px;border-radius:10px;background:#0b0d12}
+.brand .title{font-weight:700}
+.nav a.button, button, .btn{
+  background:linear-gradient(135deg,var(--primary),#6366f1); color:white; padding:10px 14px; border:none;
+  border-radius:12px; cursor:pointer; font-weight:600; box-shadow:0 8px 20px rgba(139,92,246,.25)
+}
+.card{background:var(--card); border:1px solid var(--border); border-radius:16px; padding:18px; box-shadow:0 8px 24px rgba(0,0,0,.25);}
+.grid{display:grid; gap:16px}
+.grid-3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.grid-2{grid-template-columns:repeat(2,minmax(0,1fr))}
+input, select, textarea{
+  width:100%; background:#0b0d12; color:var(--text); border:1px solid var(--border); border-radius:12px;
+  padding:10px 12px; outline:none;
+}
+.table{width:100%; border-collapse:collapse; overflow:hidden; border-radius:12px; border:1px solid var(--border)}
+.table th, .table td{padding:10px 12px; border-bottom:1px solid var(--border)}
+.table th{background:#0b0d12; text-align:start}
+.badge{padding:4px 10px; border-radius:999px; font-size:12px; border:1px solid var(--border)}
+.ok{color:var(--ok)} .warn{color:var(--warn)} .danger{color:var(--danger)}
+.flex{display:flex; gap:10px; align-items:center}
+.right{float:inline-end}
+hr{border:0; border-top:1px solid var(--border); margin:16px 0}
+[dir="rtl"] .table th, [dir="rtl"] .table td { text-align:right }
+.lang-switch{display:flex; gap:12px; align-items:center}
+.footer{opacity:.7; font-size:12px; margin-top:20px}
